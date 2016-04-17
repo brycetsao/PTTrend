@@ -1,5 +1,22 @@
 require 'mechanize'
+require 'sqlite3'
 
+def init_db
+  db = SQLite3::Database.new 'ptt.db'
+  db.execute <<-SQL
+    CREATE TABLE IF NOT EXISTS ARTICLE
+      (
+        TITLE TEXT(256),
+        BOARD TEXT(16),
+        AUTHOR TEXT(16),
+        D DATE,
+        CONTENT VARCHAR(65536),
+        COMMENT VARCHAR(65536)
+      );
+    SQL
+end
+
+init_db
 agent = Mechanize.new
 payload = { 'from' => '/bbs/Gossiping/index.html', 'yes' => 'yes' }
 agent.post 'https://www.ptt.cc/ask/over18', payload
@@ -27,3 +44,4 @@ links.each do |l|
 	# 	insert into article values('title', 'board', 'author', 'date', m.text, comment)
 	# SQL
 end
+
