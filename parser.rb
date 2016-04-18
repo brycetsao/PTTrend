@@ -36,6 +36,7 @@ last_page = init_parser agent
     comments = p.css('.push').map &:text
 
     article_info = p.css('.article-meta-value').map &:text
+    author, board, title, date = article_info
 
     m = p.at_css('#main-content')
     m.search('.//div').remove
