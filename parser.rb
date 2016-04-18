@@ -26,7 +26,6 @@ end
 init_db
 agent = Mechanize.new
 last_page = init_parser agent
-last_page = 15000
 (1..last_page).to_a.reverse.each do |i|
   agent.get "https://www.ptt.cc/bbs/Gossiping/index#{i}.html"
   links = agent.page.css('.r-list-container a')
