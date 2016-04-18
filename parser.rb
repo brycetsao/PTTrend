@@ -26,25 +26,26 @@ end
 init_db
 agent = Mechanize.new
 last_page = init_parser agent
-(1..last_page).each do |i|
+last_page = 15000
+(1..last_page).to_a.reverse.each do |i|
   agent.get "https://www.ptt.cc/bbs/Gossiping/index#{i}.html"
   links = agent.page.css('.r-list-container a')
   links.each do |l|
+
     p = agent.get l['href']
-    m = p.at_css('#main-content')
 
     comments = p.css('.push').map &:text
 
+    article_info = p.css('.article-meta-value').map &:text
+
+    m = p.at_css('#main-content')
     m.search('.//div').remove
     content = m.text[/(.|\n)*--\n/]
-    sleep(0.1)
-    # puts content
-
     # db.execute <<-SQL
     #   insert into article values('title', 'board', 'author', 'date', m.text, comment)
     # SQL
 
-    puts content
+    #puts title, content, comments
   end
 end
 
