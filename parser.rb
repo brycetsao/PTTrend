@@ -14,6 +14,7 @@ def init_db
         COMMENT VARCHAR(65536)
       );
     SQL
+  return db
 end
 
 def init_parser agent
@@ -23,10 +24,11 @@ def init_parser agent
   p.links[7].uri.path[/[0-9]+/].to_i.next
 end
 
-init_db
+db = init_db
 agent = Mechanize.new
 last_page = init_parser agent
 (1..last_page).to_a.reverse.each do |i|
+  puts i
   agent.get "https://www.ptt.cc/bbs/Gossiping/index#{i}.html"
   links = agent.page.css('.r-list-container a')
   links.each do |l|
@@ -41,10 +43,10 @@ last_page = init_parser agent
     m = p.at_css('#main-content')
     m.search('.//div').remove
     content = m.text[/(.|\n)*--\n/]
-    # db.execute <<-SQL
-    #   insert into article values('title', 'board', 'author', 'date', m.text, comment)
-    # SQL
-
+    db.execute <<-SQL
+      insert into article values('title', 'board', 'author', 'date', 'content', 'comment')
+    SQL
+    sleep(0.1) #avoid http 503
     #puts title, content, comments
   end
 end
