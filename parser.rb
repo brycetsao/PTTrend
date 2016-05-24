@@ -44,7 +44,7 @@ last_page = init_parser agent
     m.search('.//div').remove
     content = m.text[/(.|\n)*--\n/]
     db.execute <<-SQL
-      insert into article values('title', 'board', 'author', 'date', 'content', 'comment')
+      insert into article values(title, 'board', 'author', 'date', 'content', 'comment')
     SQL
     sleep(0.1) #avoid http 503
     #puts title, content, comments
