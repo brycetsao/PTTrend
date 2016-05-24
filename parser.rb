@@ -11,8 +11,8 @@ def init_db
         BOARD TEXT(16),
         AUTHOR TEXT(16),
         D DATE,
-        CONTENT VARCHAR(4096),
-        COMMENT VARCHAR(4096)
+        CONTENT NVARCHAR(4096),
+        COMMENT NVARCHAR(4096)
       );
     SQL
   return db
@@ -50,6 +50,7 @@ cnt = 0
     sleep(0.1) #avoid http 503
   end
   cnt += 1
+  puts cnt
   break if cnt == 100
 end
 
