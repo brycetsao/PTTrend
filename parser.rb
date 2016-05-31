@@ -40,7 +40,7 @@ cnt = 0
 
     p = agent.get l['href']#抓取網頁
 
-    comments = p.css('.push').map &:text#抓取推噓文
+    comments = p.css('.push').map(&:text)#抓取推噓文
 
     push = boo = com = 0
     comments.each do |c|
@@ -54,27 +54,23 @@ cnt = 0
       end
     end
 
-    article_info = p.css('.article-meta-value').map &:text#抓取作者、版面、標題、時間等資訊
+    article_info = p.css('.article-meta-value').map(&:text)#抓取作者、版面、標題、時間等資訊
     author, board, title, date = article_info
 
     m = p.at_css('#main-content')
     m.search('.//div').remove
     content = m.text[/(.|\n)*--\n/]#抓取文章內文
 
-    political = false
+    political = 0
 
     comment = comments.join(',')
 
     db.execute("INSERT INTO ARTICLES ('title', 'board', 'author', 'd', 'content', 'comment', 'push', 'boo', 'com', 'political')
-               VALUES (?, ?, ?, ?, ?, ?)", [title, board, author, date, content, comment, push, boo, com, political])#寫入資料庫
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                [title, board, author, date, content, comment, push, boo, com, political])#寫入資料庫
     sleep(0.1) #avoid http 503
   end
   cnt += 1
   puts cnt
   break if cnt == 100
 end
-
-# db = SQLite3::Database.open 'ptt.db'
-
-# current_year = 2016
-# base_url = 'https://www.ptt.cc'
