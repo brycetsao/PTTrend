@@ -12,7 +12,11 @@ def init_db
         AUTHOR TEXT(16),
         D DATE,
         CONTENT NVARCHAR(4096),
-        COMMENT NVARCHAR(4096)
+        COMMENT NVARCHAR(4096),
+        PUSH INTEGER,
+        BOO INTEGER,
+        COM INTEGER,
+        POLITICAL BOOLEAN
       );
     SQL
   return db
@@ -38,15 +42,31 @@ cnt = 0
 
     comments = p.css('.push').map &:text#抓取推噓文
 
+    push = boo = com = 0
+    comments.each do |c|
+      case c[0]
+        when "推"
+          push += 1
+        when "噓"
+          boo += 1
+        else
+          com += 1
+      end
+    end
+
     article_info = p.css('.article-meta-value').map &:text#抓取作者、版面、標題、時間等資訊
     author, board, title, date = article_info
 
     m = p.at_css('#main-content')
     m.search('.//div').remove
     content = m.text[/(.|\n)*--\n/]#抓取文章內文
+
+    political = false
+
     comment = comments.join(',')
-    db.execute("INSERT INTO ARTICLES ('title', 'board', 'author', 'd', 'content', 'comment')
-                VALUES (?, ?, ?, ?, ?, ?)", [title, board, author, date, content, comment])#寫入資料庫
+
+    db.execute("INSERT INTO ARTICLES ('title', 'board', 'author', 'd', 'content', 'comment', 'push', 'boo', 'com', 'political')
+               VALUES (?, ?, ?, ?, ?, ?)", [title, board, author, date, content, comment, push, boo, com, political])#寫入資料庫
     sleep(0.1) #avoid http 503
   end
   cnt += 1
@@ -58,6 +78,3 @@ end
 
 # current_year = 2016
 # base_url = 'https://www.ptt.cc'
-
-
-
