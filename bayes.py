@@ -61,8 +61,8 @@ print(clf.predict([non_pol_x]))
 print(clf.predict([pol_x]))
 
 #Save classifier
-with open('clf.pkl', 'wb') as file:
-    pickle.dump(clf, file, pickle.HIGHEST_PROTOCOL)
+from sklearn.externals import joblib
+joblib.dump(clf, 'clf.pkl', compress=9)
 
 #Test
 print("Testing")
