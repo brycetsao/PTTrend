@@ -16,7 +16,8 @@ def init_db
         PUSH INTEGER,
         BOO INTEGER,
         COM INTEGER,
-        POLITICAL BOOLEAN
+        POLITICAL BOOLEAN,
+        LABELED BOOLEAN
       );
     SQL
   return db
@@ -60,14 +61,11 @@ cnt = 0
     m = p.at_css('#main-content')
     m.search('.//div').remove
     content = m.text[/(.|\n)*--\n/]#抓取文章內文
-
-    political = 0
-
     comment = comments.join(',')
 
-    db.execute("INSERT INTO ARTICLES ('title', 'board', 'author', 'd', 'content', 'comment', 'push', 'boo', 'com', 'political')
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                [title, board, author, date, content, comment, push, boo, com, political])#寫入資料庫
+    db.execute("INSERT INTO ARTICLES ('title', 'board', 'author', 'd', 'content', 'comment', 'push', 'boo', 'com', 'political', 'labeled')
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                [title, board, author, date, content, comment, push, boo, com, 0, 0])#寫入資料庫
     sleep(0.1) #avoid http 503
   end
   cnt += 1

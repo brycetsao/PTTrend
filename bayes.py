@@ -2,6 +2,7 @@
 import numpy as np
 import jieba
 import pickle
+import sqlite3
 
 class Counter(dict):
     def __missing__(self, key):
@@ -32,6 +33,42 @@ class Feature:
             pickle.dump(self.chinese_dict, file, pickle.HIGHEST_PROTOCOL)
 
 #training data
+
+pol = []
+non_pol = []
+
+db = sqlite3.connect('ptt.db')
+cur = db.execute('select * from articles')
+for i in cur:
+    print('================================================================')
+    print(i[1]) #title
+    cmd = raw_input('-->')
+    if(cmd == 'y'):
+        print('YES')
+        flag = True
+    elif(cmd == 'n'):
+        print('NO')
+        flag = True
+    else:
+        cont = i[5].split('\n') #content splitted
+        flag = False
+        l = 0
+        while not flag:
+            if(l < len(cont)):
+                while(cont[l] == '' and l < len(cont) - 1):
+                    l += 1
+                print(cont[l])
+            cmd = raw_input('-->')
+            if(cmd == 'y'):
+                print('YES')
+                flag = True
+            elif(cmd == 'n'):
+                print('NO')
+                flag = True
+            elif(l < len(cont) - 1):
+                l += 1
+
+
 #不是政治文
 non_pol = ["八卦版有宅宅 有大學生 也有兩者交集沒女友的悲憤大學宅宅 整天在宿舍發廢文 抱著粗音顆顆笑 孤單一個人 豪恐怖喔QQ 有沒有哪間大學宅宅最多的八卦？"]
 #是政治文
@@ -65,8 +102,10 @@ from sklearn.externals import joblib
 joblib.dump(clf, 'clf.pkl', compress=9)
 
 #Test
-print("Testing")
-test = ["民進黨", "哈哈交大哈哈ob'_'ov"]#第一篇是政治文，第二篇不是政治文
+print("Testing:")
+# test = ["民進黨", "哈哈交大哈哈ob'_'ov"]#第一篇是政治文，第二篇不是政治文
+
+t = input()
 for i in test:
     print(clf.predict([f.features(i)]))
 
