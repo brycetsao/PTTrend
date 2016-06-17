@@ -1,11 +1,13 @@
 import sqlite3
 
 db = sqlite3.connect('ptt.db')
-articles = db.execute('select * from articles where `LABELED` = 0').fetchall()
+
+keyword = input('Keyword:')
+articles = db.execute('select * from articles where `LABELED` = 0 and `CONTENT` like \'%'+keyword+'%\'').fetchall()
 for i in articles:
     print('================================================================')
     print(i[1]) #title
-    cmd = input('-->')
+    cmd = input('>')
     if(cmd == 'y'):
         print('YES')
         print(i[0])
@@ -27,7 +29,7 @@ for i in articles:
                 while(cont[l] == '' and l < len(cont) - 1):
                     l += 1
                 print(cont[l])
-            cmd = input('-->')
+            cmd = input('>')
             if(cmd == 'y'):
                 print('YES')
                 db.execute('UPDATE articles SET `POLITICAL`=1, `LABELED`=1 WHERE id='+str(i[0]))
