@@ -20,15 +20,15 @@ f = Feature()
 print(f.size())
 
 db = sqlite3.connect('ptt.db')
-pol = db.execute('SELECT content FROM articles WHERE `LABELED`=1 AND `POLITICAL`=1')
-non_pol = db.execute('SELECT content FROM articles WHERE `LABELED`=1 AND `POLITICAL`=0')
 non_pol_x = np.zeros(1000000, dtype=np.int)
 pol_x = np.zeros(1000000, dtype=np.int)
+pol = db.execute('SELECT content FROM articles WHERE `LABELED`=1 AND `POLITICAL`=1')
+for post in pol:
+    pol_x += f.features(post[0])
+non_pol = db.execute('SELECT content FROM articles WHERE `LABELED`=1 AND `POLITICAL`=0')
 for post in non_pol:
     non_pol_x += f.features(post[0])
 
-for post in pol:
-    pol_x += f.features(post[0])
 X = np.array([non_pol_x, pol_x])
 y = np.array([0, 1])
 
@@ -45,7 +45,7 @@ joblib.dump(clf, 'clf.pkl', compress=9)
 #Test
 print("Testing:")
 # test = ["民進黨", "哈哈交大哈哈ob'_'ov"]#第一篇是政治文，第二篇不是政治文
-test = db.execute('SELECT content FROM articles WHERE `id`=19256')
+test = db.execute('SELECT content FROM articles WHERE `id`=19254')
 
 for i in test:
     print(i[0])
