@@ -52,7 +52,7 @@ for i in test:
         continue
     print(i[0])
     print(clf.predict([f.features(i[0])]))
-    #input()
+    print(clf.predict_proba([f.features(i[0])]))
 
 #Save chinese_dict
 f.store()
