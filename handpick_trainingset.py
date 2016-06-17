@@ -1,9 +1,8 @@
 import sqlite3
 
 db = sqlite3.connect('ptt.db')
-articles = db.execute('select * from articles').fetchall()
+articles = db.execute('select * from articles where `LABELED` = 0').fetchall()
 for i in articles:
-    if i[10]: continue #continue if labeled
     print('================================================================')
     print(i[1]) #title
     cmd = input('-->')
