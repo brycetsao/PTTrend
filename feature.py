@@ -28,3 +28,7 @@ class Feature:
     def store(self):
         with open('c_dict.pkl', 'wb') as file:
             pickle.dump(self.chinese_dict, file, pickle.HIGHEST_PROTOCOL)
+
+    def size(self):
+        return len(self.chinese_dict)
+
