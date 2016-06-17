@@ -24,7 +24,7 @@ non_pol_x = np.zeros(1000000, dtype=np.int)
 pol_x = np.zeros(1000000, dtype=np.int)
 pol = db.execute('SELECT content FROM articles WHERE `LABELED`=1 AND `POLITICAL`=1')
 for post in pol:
-    pol_x += f.features(post[0])
+    pol_x += f.features(post[0]) * 2
 non_pol = db.execute('SELECT content FROM articles WHERE `LABELED`=1 AND `POLITICAL`=0')
 for post in non_pol:
     non_pol_x += f.features(post[0])
@@ -45,11 +45,14 @@ joblib.dump(clf, 'clf.pkl', compress=9)
 #Test
 print("Testing:")
 # test = ["民進黨", "哈哈交大哈哈ob'_'ov"]#第一篇是政治文，第二篇不是政治文
-test = db.execute('SELECT content FROM articles WHERE `id`=19254')
+test = db.execute('SELECT content FROM articles')
 
 for i in test:
+    if not i[0]:
+        continue
     print(i[0])
     print(clf.predict([f.features(i[0])]))
+    print(clf.predict_proba([f.features(i[0])]))
 
 #Save chinese_dict
 f.store()
