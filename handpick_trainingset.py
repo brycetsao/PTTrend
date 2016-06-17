@@ -1,8 +1,8 @@
 import sqlite3
 
 db = sqlite3.connect('ptt.db')
-cur = db.execute('select * from articles')
-for i in cur:
+articles = db.execute('select * from articles').fetchall()
+for i in articles:
     print('================================================================')
     print(i[1]) #title
     cmd = input('-->')
