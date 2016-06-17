@@ -17,17 +17,18 @@ from feature import Counter, Feature
 
 #Features
 f = Feature()
+print(f.size())
 
 db = sqlite3.connect('ptt.db')
-pol = db.execute('SELECT * FROM articles WHERE `LABELED`=1 AND `POLITICAL`=1')
-non_pol = db.execute('SELECT * FROM articles WHERE `LABELED`=1 AND `POLITICAL`=0')
+pol = db.execute('SELECT content FROM articles WHERE `LABELED`=1 AND `POLITICAL`=1')
+non_pol = db.execute('SELECT content FROM articles WHERE `LABELED`=1 AND `POLITICAL`=0')
 non_pol_x = np.zeros(1000000, dtype=np.int)
 pol_x = np.zeros(1000000, dtype=np.int)
 for post in non_pol:
-    non_pol_x += f.features(post)
+    non_pol_x += f.features(post[0])
 
 for post in pol:
-    pol_x += f.features(post)
+    pol_x += f.features(post[0])
 X = np.array([non_pol_x, pol_x])
 y = np.array([0, 1])
 
@@ -37,10 +38,6 @@ clf = MultinomialNB()
 #Open File
 clf.fit(X, y)
 
-#Result
-print(clf.predict([non_pol_x]))
-print(clf.predict([pol_x]))
-
 #Save classifier
 from sklearn.externals import joblib
 joblib.dump(clf, 'clf.pkl', compress=9)
@@ -48,10 +45,11 @@ joblib.dump(clf, 'clf.pkl', compress=9)
 #Test
 print("Testing:")
 # test = ["民進黨", "哈哈交大哈哈ob'_'ov"]#第一篇是政治文，第二篇不是政治文
-test = db.execute('SELECT * FROM articles WHERE `id`=19256')
+test = db.execute('SELECT content FROM articles WHERE `id`=19256')
 
 for i in test:
-    print(clf.predict([f.features(i)]))
+    print(i[0])
+    print(clf.predict([f.features(i[0])]))
 
 #Save chinese_dict
 f.store()
