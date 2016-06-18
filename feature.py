@@ -16,7 +16,21 @@ class Feature:
         self.index = len(self.chinese_dict) + 1
 
     def features(self, str):
-        x = np.zeros(1000000, dtype=np.int)
+        x = np.zeros(300000, dtype=np.int)
+        if not str:
+            return x
+        seg_list = jieba.cut(str)
+        for i in seg_list:
+            if self.chinese_dict[i] == 0:
+                self.chinese_dict[i] = self.index
+                self.index += 1
+            x[self.chinese_dict[i]] += 1
+        return x
+
+    def features_for_tensorflow(self, str):
+        x = np.zeros([300000,1], dtype=np.float32)
+        if not str:
+            return x
         seg_list = jieba.cut(str)
         for i in seg_list:
             if self.chinese_dict[i] == 0:
