@@ -55,4 +55,4 @@ for i in test:
     print(clf.predict_proba([f.features(i[0])]))
 
 #Save chinese_dict
-f.store()
+#f.store()
