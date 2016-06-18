@@ -20,8 +20,8 @@ f = Feature()
 print(f.size())
 
 db = sqlite3.connect('ptt.db')
-non_pol_x = np.zeros(1000000, dtype=np.int)
-pol_x = np.zeros(1000000, dtype=np.int)
+non_pol_x = np.zeros(300000, dtype=np.int)
+pol_x = np.zeros(300000, dtype=np.int)
 pol = db.execute('SELECT content FROM articles WHERE `LABELED`=1 AND `POLITICAL`=1')
 for post in pol:
     pol_x += f.features(post[0]) * 2

@@ -14,6 +14,6 @@ for i in cur:
         f.features(i[5])
     except:
         print(i[5])
-    print(a)
+    print(f.size())
 
 f.store()
