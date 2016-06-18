@@ -11,10 +11,14 @@ cur = db.execute('SELECT * FROM ARTICLES LIMIT 1000')
 # Create 100 phony x, y data points in NumPy, y = x * 0.1 + 0.3
 f = Feature()
 post_data = []
-y_data = []
+push_data = []
+boo_data = []
 for i in cur:
     post_data.append(f.features_for_tensorflow(i[5]))
-    y_data.append(i[7])
+    push_data.append(i[7])
+    boo_data.append(i[8])
+
+y_data = np.array(push_data) - np.array(boo_data)
 
 x_data = np.array(post_data)
 x = tf.placeholder(tf.float32, shape=(300000, 1))
