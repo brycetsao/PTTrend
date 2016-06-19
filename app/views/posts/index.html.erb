@@ -10,7 +10,6 @@
     <div class="nrec">
       <span class="hl f2">50</span>
     </div>
-    <div class="mark"></div>
     <div class="title">
       有沒有PTTrend的八卦？
     </div>
@@ -29,7 +28,7 @@
     <div class="nrec">
       <span class="hl f2"><%= p.comment %></span>
     </div>
-    <div class="mark"></div>
+    <div class="mark"><%= political(p) %></div>
     <div class="title">
       <%= link_to p.title, post_path(p.id) %>
     </div>
