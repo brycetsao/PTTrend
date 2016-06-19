@@ -26,14 +26,14 @@ Follow the steps to predict if a article is politics-related:
 In `ptt.db` we have already labelled a small part of articles as politics-related or non-politics-related, so you can skip this step, but if you would like to make a bigger training set, you can use the script `handpick_trainingset.py` to manually label them.
 
 ## Predict
-Use `bayes.py` to predict if you content is political. There are two ways to make predictions:
+Use `pttrend.py` to predict if you content is political. There are two ways to make predictions:
 
 1. Use `-i` command line option to read content from stdin and make prediction, for example:
 ````
-echo "民進黨" | python3 bayes.py -i
+echo "民進黨" | python3 pttrend.py -i
 ````
 
 2. Use `-p [id]` to read existing articles from the database and make prediction:
 ````
-python3 bayes.py -p 1000
+python3 pttrend.py -p 1000
 ````

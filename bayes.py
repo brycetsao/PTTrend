@@ -49,22 +49,4 @@ clf.fit(X, y)
 from sklearn.externals import joblib
 joblib.dump(clf, 'clf.pkl', compress=9)
 
-#Test
-print("Testing:")
-# test = ["民進黨", "哈哈交大哈哈ob'_'ov"]#第一篇是政治文，第二篇不是政治文
-if parsed_args.p:
-    test = db.execute('SELECT content FROM articles WHERE id='+parsed_args.p[0]).fetchone()[0]
-elif parsed_args.i:
-    test = sys.stdin.read()
-else:
-    parser.print_help()
-    exit()
-
-if not test:
-    print("Empty input")
-print(test)
-print(clf.predict([f.features(test)]))
-print(clf.predict_proba([f.features(test)]))
-
-#Save chinese_dict
-#f.store()
+f.store()
