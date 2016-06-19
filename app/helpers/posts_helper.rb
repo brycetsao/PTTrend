@@ -29,7 +29,7 @@ module PostsHelper
     elsif c >= 0
       return "#{c}推"
     else
-      return "#{c}噓"
+      return "#{c.abs}噓"
     end
   end
 
