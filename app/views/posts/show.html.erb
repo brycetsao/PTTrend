@@ -17,13 +17,11 @@
   </div>
   <%= @post.content %>
   <div class="r-list-sep"></div>
-  <p>
-    詳細資料：
-    <br>
-    政治文機率：<%= @post.proba_of_political %>%
-    <br>
-    非政治文機率：<%= 100 - @post.proba_of_political %>%
-    <br>
-    得到推噓數：<%= comment_details(@post.comment) %>
-  </p>
+  <span class="f2">
+    ※ 政治文機率：<%= @post.proba_of_political %>%
+    <br/>
+    ※ 非政治文機率：<%= 100 - @post.proba_of_political %>%
+    <br/>
+    ※ 得到推噓數：<%= comment_details(@post.comment) %>
+  </span>
 </div>
