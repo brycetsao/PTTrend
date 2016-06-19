@@ -12,8 +12,10 @@ module PostsHelper
       return
     elsif c < -99
       return content_tag(:span, "XX", :class => "hl f0")
-    elsif c < 0
-      return content_tag(:span, "X#{c / 10}", :class => "hl f0")
+    elsif c <= -10
+      return content_tag(:span, "X#{c.abs / 10}", :class => "hl f0")
+    elsif c <= 0
+      return content_tag(:span, "")
     elsif c > 99
       return content_tag(:span, "爆", :class => "hl f1")
     elsif c < 10
