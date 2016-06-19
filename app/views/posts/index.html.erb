@@ -9,7 +9,7 @@
   <h2>範例</h2>
   <div class="r-ent">
     <div class="nrec">
-      <span class="hl f2">50</span>
+      <span class="hl f1">爆</span>
     </div>
     <div class="title">
       有沒有PTTrend的八卦？
@@ -27,7 +27,7 @@
   <% @posts.each do |p| %>
   <div class="r-ent">
     <div class="nrec">
-      <span class="hl f2"><%= p.comment %></span>
+      <%= comment(p.comment) %>
     </div>
     <div class="mark"><%= political(p) %></div>
     <div class="title">
@@ -35,7 +35,7 @@
     </div>
     <div class="meta">
       <div class="date">
-        <%= p.updated_at.strftime("%m/%d") %>
+        <%= p.updated_at.strftime("%-m/%d") %>
       </div>
       <div class="author">
         <%= p.author %>

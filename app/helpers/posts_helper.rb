@@ -6,4 +6,21 @@ module PostsHelper
       return ""
     end
   end
+
+  def comment(c)
+    if c.nil?
+      return
+    elsif c < -99
+      return content_tag(:span, "XX", :class => "hl f0")
+    elsif c < 0
+      return content_tag(:span, "X#{c / 10}", :class => "hl f0")
+    elsif c > 99
+      return content_tag(:span, "爆", :class => "hl f1")
+    elsif c < 10
+      return content_tag(:span, c, :class => "hl f2")
+    else
+      return content_tag(:span, c, :class => "hl f3")
+    end
+  end
+
 end
