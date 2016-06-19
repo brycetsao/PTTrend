@@ -16,4 +16,14 @@
     <span class="article-meta-value"><%= @post.updated_at.strftime("%a %b %d %H:%M:%S %Y") %></span>
   </div>
   <%= @post.content %>
+  <div class="r-list-sep"></div>
+  <p>
+    詳細資料：
+    <br>
+    政治文機率：<%= @post.proba_of_political %>%
+    <br>
+    非政治文機率：<%= 100 - @post.proba_of_political %>%
+    <br>
+    得到推噓數：<%= comment_details(@post.comment) %>
+  </p>
 </div>

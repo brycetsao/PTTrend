@@ -23,4 +23,14 @@ module PostsHelper
     end
   end
 
+  def comment_details(c)
+    if c.nil?
+      return
+    elsif c >= 0
+      return "#{c}推"
+    else
+      return "#{c}噓"
+    end
+  end
+
 end

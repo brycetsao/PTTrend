@@ -9,6 +9,11 @@ class Post < ActiveRecord::Base
       self.political = true
     end
     self.proba_of_political = (result[2].split[2][0..-3].to_f * 100).to_i
+    if self.proba_of_political > 100
+      self.proba_of_political = 100
+    elsif self.proba_of_political < 0
+      self.proba_of_political = 0
+    end
     self.comment = result[3].to_i
   end
 end
