@@ -1,0 +1,8 @@
+<div class="bbs-screen">
+  <%= simple_form_for @post do |f| %>
+  <%= f.input :title, :label => '標題' %>
+  <%= f.input :author, :label => '暱稱' %>
+  <%= f.input :content, :label => '文章' %>
+  <%= f.submit %>
+  <% end %>
+</div>

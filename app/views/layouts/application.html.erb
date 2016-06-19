@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PttanalRails</title>
+    <title>PTTrend</title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
@@ -9,9 +9,7 @@
   <body>
     <%= render 'common/navbar' %>
     <div id="main-container">
-      <div class="r-list-container bbs-screen">
-        <%= yield %>
-      </div>
+      <%= yield %>
     </div>
   </body>
 </html>

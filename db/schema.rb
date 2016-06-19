@@ -14,7 +14,9 @@
 ActiveRecord::Schema.define(version: 20160618181821) do
 
   create_table "posts", force: :cascade do |t|
-    t.string   "content"
+    t.string   "title"
+    t.text     "content"
+    t.string   "author"
     t.boolean  "political"
     t.integer  "proba_of_political"
     t.integer  "comment"

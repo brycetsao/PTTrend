@@ -35,7 +35,7 @@ class PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:content, :political, :proba_of_political, :comment)
+    params.require(:post).permit(:content, :political, :proba_of_political, :comment, :author, :title)
   end
 
   def find_post

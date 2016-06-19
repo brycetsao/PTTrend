@@ -1,15 +1,46 @@
-<h1>政治文分析 / 推噓數預測</h1>
-
-<h2>範例</h2>
-<div class="r-ent">
-  <div class="nrec">
-    <span class="hl f2">100</span>
+<div class="r-list-container bbs-screen">
+  <h1>政治文分析 / 推噓數預測</h1>
+  <div class="action-bar">
+    <div class="btn-group">
+      <%= link_to '文章分析', new_post_path, :class => "btn wide" %>
+    </div>
   </div>
-  <div class="mark"></div>
-  <div class="title">
-  	<a href=""></a>
+  <h2>範例</h2>
+  <div class="r-ent">
+    <div class="nrec">
+      <span class="hl f2">50</span>
+    </div>
+    <div class="mark"></div>
+    <div class="title">
+      有沒有PTTrend的八卦？
+    </div>
+    <div class="meta">
+      <div class="date">
+        6/19
+      </div>
+      <div class="author">
+        鄉民
+      </div>
+    </div>
   </div>
+  <div class="r-list-sep"></div>
+  <% @posts.each do |p| %>
+  <div class="r-ent">
+    <div class="nrec">
+      <span class="hl f2"><%= p.comment %></span>
+    </div>
+    <div class="mark"></div>
+    <div class="title">
+      <%= link_to p.title, post_path(p.id) %>
+    </div>
+    <div class="meta">
+      <div class="date">
+        <%= p.updated_at.strftime("%m/%d") %>
+      </div>
+      <div class="author">
+        <%= p.author %>
+      </div>
+    </div>
+  </div>
+  <% end %>
 </div>
-
-<% @posts.each do |p| %>
-  <div>
