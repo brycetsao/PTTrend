@@ -13,6 +13,8 @@ On Ubuntu:
 ````
 sudo apt install python3-pip python3-scipy python3-numpy
 sudo pip3 install jieba sklearn
+
+sudo pip3 install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.8.0-cp34-cp34m-linux_x86_64.whl
 ````
 
 # Run
