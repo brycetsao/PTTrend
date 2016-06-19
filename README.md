@@ -9,8 +9,11 @@ We can know the degree of indication of each feature by extracting features and 
 
 # Installation
 On Ubuntu:
-    sudo apt install python3-pip python3-scipy python3-numpy
-	sudo pip3 install jieba sklearn
+
+````
+sudo apt install python3-pip python3-scipy python3-numpy
+sudo pip3 install jieba sklearn
+````
 
 # Run
 You can directly use our scraped PTT 八卦版 articles, from `ptt.db`, if you would like to scrape the latest data, please run `parser.rb`.
@@ -21,4 +24,14 @@ Follow the steps to predict if a article is politics-related:
 In `ptt.db` we have already labelled a small part of articles as politics-related or non-politics-related, so you can skip this step, but if you would like to make a bigger training set, you can use the script `handpick_trainingset.py` to manually label them.
 
 ## Predict
-Use `bayes.py` to predict if you content is political. (TODO)
+Use `bayes.py` to predict if you content is political. There are two ways to make predictions:
+
+1. Use `-i` command line option to read content from stdin and make prediction, for example:
+````
+echo "民進黨" | python3 bayes.py -i
+````
+
+2. Use `-p [id]` to read existing articles from the database and make prediction:
+````
+python3 bayes.py -p 1000
+````
