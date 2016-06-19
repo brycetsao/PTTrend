@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
 
   def python
     #PttrendJob.perform_later(self.id)
-    result = `cd lib/assets/python/ && echo #{self.content} | python3 pttrend.py -i -l`.split("\n")
+    result = `cd lib/assets/python/ && echo "#{self.content}" | python3 pttrend.py -i -l`.split("\n")
     if result[1] == "[1]"
       self.political = true
     end
