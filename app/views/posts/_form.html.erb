@@ -1,8 +1,11 @@
 <div class="bbs-screen">
   <%= simple_form_for @post do |f| %>
   <%= f.input :title, :label => '標題' %>
+  <br />
   <%= f.input :author, :label => '暱稱' %>
-  <%= f.input :content, :label => '文章' %>
-  <%= f.submit %>
+  <br />
+  <%= f.input :content, :label => '文章', :input_html => {:rows => 10} %>
+  <br />
+  <%= f.button :submit, :value => '發文', :class => "wide" %>
   <% end %>
 </div>
