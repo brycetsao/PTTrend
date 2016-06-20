@@ -53,3 +53,4 @@ bower.json
 .powenv
 
 /__pycache__
+/lib/assets/python/__pycache__

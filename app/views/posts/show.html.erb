@@ -15,7 +15,9 @@
     <span class="article-meta-tag">時間</span>
     <span class="article-meta-value"><%= @post.updated_at.strftime("%a %b %d %H:%M:%S %Y") %></span>
   </div>
-  <%= @post.content %>
+  <p>
+    <%= simple_format @post.content %>
+  </p>
   <div class="r-list-sep"></div>
   <span class="f2">
     ※ 政治文機率：<%= @post.proba_of_political %>%
