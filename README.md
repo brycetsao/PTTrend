@@ -21,7 +21,7 @@ sudo pip3 install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/
 ````
 
 # Run
-You can directly use our scraped PTT 八卦版 articles, from `ptt.db`, if you would like to scrape the latest data, please run `parser.rb`.
+You can directly use our scraped PTT Gossiping articles, from `ptt.db`, if you would like to scrape the latest data, please run `parser.rb`.
 
 Follow the steps to predict if a article is politics-related:
 
